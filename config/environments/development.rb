@@ -63,5 +63,5 @@ Rails.application.configure do
   config.middleware.insert_after ActionDispatch::Static, Rack::LiveReload
 
   # or, if you're using better_errors:
-  config.middleware.insert_before Rack::Lock, Rack::LiveReload
+  config.middleware.insert_before Rack::Runtime, Rack::LiveReload
 end
