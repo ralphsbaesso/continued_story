@@ -64,4 +64,7 @@ Rails.application.configure do
 
   # or, if you're using better_errors:
   config.middleware.insert_before Rack::Runtime, Rack::LiveReload
+
+  # devise
+  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
 end

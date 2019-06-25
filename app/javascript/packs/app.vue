@@ -1,9 +1,11 @@
 <template>
   <div id="app">
-    <main class="tag">Conteúdo</main>
+    <main class="tag">
+      <router-view />
+      Conteúdo
+    </main>
     <header class="tag">
-
-      <header></header>
+      <Header/>
     </header>
     <footer class="tag">Rodapé</footer>
     <nav class="tag">Navegação</nav>
@@ -39,26 +41,27 @@ p {
 
   nav {
     grid-area: grid-nav;
-    background: #999999;
+    background: black;
   }
 
   main {
     grid-area: grid-main;
-    background: rgb(2,0,36);
-    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,108,121,0.9262079831932774) 22%, rgba(0,212,255,1) 100%);
+    background: linear-gradient(to right, rgb(15, 32, 39), rgb(32, 58, 67), rgb(44, 83, 100));
+    color: #FFF;
   }
 
   footer {
     grid-area: grid-footer;
+    background: #343a40;
   }
 
   #app {
     display: grid;
     min-height: 100vh;
-    grid-template-columns: 200px 1fr;
-    grid-template-rows: 100px 1fr 100px;
+    grid-template-columns: 150px 1fr;
+    grid-template-rows: 56px 1fr 56px;
     grid-template-areas:
-            'grid-header grid-header'
+            'grid-nav grid-header'
             'grid-nav grid-main'
             'grid-nav grid-footer';
   }
