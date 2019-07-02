@@ -5,4 +5,6 @@ Rails.application.routes.draw do
       registrations: 'users/registrations'
   }
 
+  get 'users/current', to: 'users#current'
+
 end

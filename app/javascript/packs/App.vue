@@ -5,7 +5,7 @@
       Conteúdo
     </main>
     <header class="tag">
-      <Header/>
+      <Header />
     </header>
     <footer class="tag">Rodapé</footer>
     <nav class="tag">Navegação</nav>
@@ -23,8 +23,13 @@
     components: { Header },
     data: function () {
       return {
-        message: "Hello Vue!!!!!!!!!!!!!!"
+        message: "Hello Vue!!!!!!!!!!!!!!",
       }
+    },
+    created() {
+      this.$http.get('users/current').then(resp => {
+        this.$store.state.user = resp.data
+      })
     }
   }
 </script>
