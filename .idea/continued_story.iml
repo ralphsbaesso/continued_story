@@ -52,9 +52,11 @@
     <orderEntry type="library" scope="PROVIDED" name="devise (v4.6.2, RVM: ruby-2.5.5 [continued_sotry]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="dotenv (v0.7.0, RVM: ruby-2.5.5 [continued_sotry]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="em-websocket (v0.5.1, RVM: ruby-2.5.5 [continued_sotry]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="equatable (v0.6.1, RVM: ruby-2.5.5 [continued_sotry]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="erubi (v1.8.0, RVM: ruby-2.5.5 [continued_sotry]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="eventmachine (v1.2.7, RVM: ruby-2.5.5 [continued_sotry]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="execjs (v2.7.0, RVM: ruby-2.5.5 [continued_sotry]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="faker (v1.9.4, RVM: ruby-2.5.5 [continued_sotry]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="ffi (v1.11.1, RVM: ruby-2.5.5 [continued_sotry]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="foreman (v0.64.0, RVM: ruby-2.5.5 [continued_sotry]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="formatador (v0.2.5, RVM: ruby-2.5.5 [continued_sotry]) [gem]" level="application" />
@@ -82,6 +84,7 @@
     <orderEntry type="library" scope="PROVIDED" name="nokogiri (v1.10.3, RVM: ruby-2.5.5 [continued_sotry]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="notiffany (v0.1.1, RVM: ruby-2.5.5 [continued_sotry]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="orm_adapter (v0.5.0, RVM: ruby-2.5.5 [continued_sotry]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="pastel (v0.7.3, RVM: ruby-2.5.5 [continued_sotry]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="pg (v1.1.4, RVM: ruby-2.5.5 [continued_sotry]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="pry (v0.12.2, RVM: ruby-2.5.5 [continued_sotry]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="puma (v3.12.1, RVM: ruby-2.5.5 [continued_sotry]) [gem]" level="application" />
@@ -106,11 +109,20 @@
     <orderEntry type="library" scope="PROVIDED" name="spring-watcher-listen (v2.0.1, RVM: ruby-2.5.5 [continued_sotry]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="sprockets (v3.7.2, RVM: ruby-2.5.5 [continued_sotry]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="sprockets-rails (v3.2.1, RVM: ruby-2.5.5 [continued_sotry]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="strings (v0.1.5, RVM: ruby-2.5.5 [continued_sotry]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="strings-ansi (v0.1.0, RVM: ruby-2.5.5 [continued_sotry]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="thor (v0.20.3, RVM: ruby-2.5.5 [continued_sotry]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="thread_safe (v0.3.6, RVM: ruby-2.5.5 [continued_sotry]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="tilt (v2.0.9, RVM: ruby-2.5.5 [continued_sotry]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="tty-color (v0.5.0, RVM: ruby-2.5.5 [continued_sotry]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="tty-pager (v0.12.1, RVM: ruby-2.5.5 [continued_sotry]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="tty-screen (v0.6.5, RVM: ruby-2.5.5 [continued_sotry]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="tty-tree (v0.3.0, RVM: ruby-2.5.5 [continued_sotry]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="tty-which (v0.4.1, RVM: ruby-2.5.5 [continued_sotry]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="tzinfo (v1.2.5, RVM: ruby-2.5.5 [continued_sotry]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="uglifier (v4.1.20, RVM: ruby-2.5.5 [continued_sotry]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="unicode-display_width (v1.6.0, RVM: ruby-2.5.5 [continued_sotry]) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="unicode_utils (v1.4.0, RVM: ruby-2.5.5 [continued_sotry]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="warden (v1.2.8, RVM: ruby-2.5.5 [continued_sotry]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="web-console (v3.7.0, RVM: ruby-2.5.5 [continued_sotry]) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="webpacker (v4.0.7, RVM: ruby-2.5.5 [continued_sotry]) [gem]" level="application" />

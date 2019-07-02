@@ -13,7 +13,7 @@
             <template slot="button-content">
               <em>{{ user.email }}</em>
             </template>
-            <b-dropdown-item href="#">{{ user }}</b-dropdown-item>
+            <b-dropdown-item href="#">Perfil</b-dropdown-item>
             <b-dropdown-item data-method="DELETE" href="users/sign_out">Sair</b-dropdown-item>
           </b-nav-item-dropdown>
           <b-nav-item-dropdown v-else right>
@@ -21,7 +21,7 @@
             <template slot="button-content">
               <em>Entrar</em>
             </template>
-            <b-dropdown-item href="user/sign_in">Entrar</b-dropdown-item>
+            <b-dropdown-item href="users/sign_in">Entrar</b-dropdown-item>
             <b-dropdown-item href="users/sign_up">Registrar</b-dropdown-item>
           </b-nav-item-dropdown>
 
