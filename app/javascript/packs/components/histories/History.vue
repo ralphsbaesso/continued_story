@@ -1,6 +1,7 @@
 <template>
   <div>
-    <h1>{{ history }}</h1>
+    <h2>{{ history.title }}</h2>
+    <p>{{ history.description }}</p>
   </div>
 </template>
 

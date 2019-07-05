@@ -1,7 +1,9 @@
 <template>
   <div>
-    <h2>Menu</h2>
-    <Histories />
+    <b-container>
+      <h2>Menu</h2>
+      <Histories />
+    </b-container>
   </div>
 
 </template>
@@ -10,8 +12,7 @@
   import Histories from './Histories'
 
   export default {
-    components: {Histories},
-    comments: { Histories }
+    components: { Histories },
 
   }
 </script>
