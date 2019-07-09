@@ -70,7 +70,7 @@ p {
     grid-template-columns: 150px 1fr;
     grid-template-rows: 56px 1fr 56px;
     grid-template-areas:
-            'grid-nav grid-header'
+            'grid-header grid-header'
             'grid-nav grid-main'
             'grid-nav grid-footer';
   }
