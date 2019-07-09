@@ -1,17 +1,19 @@
 <template>
   <div>
     <h2>Menu</h2>
-    <Histories />
+    <p @click="changeName">Aqui</p>
   </div>
 
 </template>
 
 <script>
-  import Histories from './Histories'
 
   export default {
-    components: {Histories},
-    comments: { Histories }
+    methods: {
+      changeName() {
+        this.$store.state.user.email = new Date().toDateString()
+      }
+    }
 
   }
 </script>

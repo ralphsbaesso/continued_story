@@ -1,14 +1,17 @@
 <template>
   <div id="app">
     <main class="tag">
-      <router-view />
-      Conteúdo
+      <b-container fluid>
+        <router-view />
+      </b-container>
     </main>
     <header class="tag">
       <Header />
     </header>
     <footer class="tag">Rodapé</footer>
-    <nav class="tag">Navegação</nav>
+    <nav class="tag">
+      <Menu />
+    </nav>
 
   </div>
 </template>
@@ -18,9 +21,10 @@
   import 'bootstrap-vue/dist/bootstrap-vue.css'
 
   import Header from './components/Header'
+  import Menu from './components/Menu'
 
   export default {
-    components: { Header },
+    components: { Header, Menu },
     data: function () {
       return {
         message: "Hello Vue!!!!!!!!!!!!!!",

@@ -1,19 +1,22 @@
 <template>
   <div>
     <p>Quantidade de Historias: {{ total }}</p>
-    <hr>
-    <ul>
-      <li v-for="history in histories">
-        <History :history="history" />
-      </li>
-    </ul>
+    <b-row>
+      <b-col cols="3" v-for="history in histories">
+        <router-link :to="`histories/${history.id}`" class="btn btn-info btn-sm">
+          <b-card text-variant="black" :title="history.title">
+            <b-card-text>
+              {{ history.description }}
+            </b-card-text>
+          </b-card>
+        </router-link>
+      </b-col>
+    </b-row>
   </div>
 </template>
 
 <script>
-  import History from './histories/History'
   export default {
-    components: { History },
     data: function () {
       return {
         total: 0,
@@ -25,12 +28,14 @@
         .then(resp => {
           this.total = resp.data.length
           this.histories = resp.data
-          console.log(resp.data)
         })
     }
   }
 </script>
 
 <style>
+  .card-body {
+    color: black;
+  }
 
 </style>
