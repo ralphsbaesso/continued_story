@@ -50,7 +50,7 @@
     },
     computed: {
       firstChapter() {
-        return null //this.history.chapter && this.history.chapter[0]
+        return this.history.chapter && this.history.chapter[0]
       }
     }
   }
