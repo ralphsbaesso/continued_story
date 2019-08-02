@@ -25,6 +25,10 @@ export default new Router({
             path: '/histories/:id',
             component: History,
             props: true
+        },
+        {
+            path: '/histories/new',
+            component: History,
         }
     ]
 })

@@ -17,14 +17,11 @@
             <b-dropdown-item href="#">Perfil</b-dropdown-item>
             <b-dropdown-item data-method="DELETE" href="users/sign_out">Sair</b-dropdown-item>
           </b-nav-item-dropdown>
-          <b-nav-item-dropdown v-else right>
-            <!-- Using 'button-content' slot -->
-            <template slot="button-content">
-              <em>Entrar</em>
-            </template>
-            <b-dropdown-item href="users/sign_in">Entrar</b-dropdown-item>
-            <b-dropdown-item href="users/sign_up">Registrar</b-dropdown-item>
-          </b-nav-item-dropdown>
+
+          <b-navbar-nav v-else right>
+            <b-nav-item href="users/sign_in">Entrar</b-nav-item>
+            <b-nav-item href="users/sign_up">Registrar</b-nav-item>
+          </b-navbar-nav>
 
         </b-navbar-nav>
       </b-collapse>

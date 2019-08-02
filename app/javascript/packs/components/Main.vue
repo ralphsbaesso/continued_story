@@ -2,6 +2,7 @@
   <div>
     <h2>Menu</h2>
     <p @click="changeName">Aqui</p>
+
   </div>
 
 </template>

@@ -9,11 +9,21 @@ class HistoriesController < ApplicationController
   end
 
   def create
+    h = History.new params_history
+    h.user = current_user
+    h.save
+    render json: :ok
   end
 
   def update
   end
 
   def destroy
+  end
+
+  private
+
+  def params_history
+    params.require(:history).permit(:title, :description, chapters_attributes: [:title, :description, :content])
   end
 end

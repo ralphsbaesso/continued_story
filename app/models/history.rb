@@ -12,15 +12,14 @@
 
 class History < ApplicationRecord
   belongs_to :user
-  has_many :chapters, dependent: :delete_all
+  has_many :chapters, dependent: :delete_all, autosave: true
+  accepts_nested_attributes_for :chapters
 
   def as_json(options = {})
     model = super(options)
-    model[:chapter] = [first_chapter]
+    model[:chapters] = [self.chapters.first]
+    p model
     model
   end
 
-  def first_chapter
-    chapters.first
-  end
 end

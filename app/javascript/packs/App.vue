@@ -57,6 +57,7 @@ p {
     grid-area: grid-main;
     background: linear-gradient(to right, rgb(15, 32, 39), rgb(32, 58, 67), rgb(44, 83, 100));
     color: #FFF;
+    position: relative;
   }
 
   footer {

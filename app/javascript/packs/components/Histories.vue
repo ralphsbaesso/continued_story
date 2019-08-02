@@ -23,7 +23,7 @@
         histories: []
       }
     },
-    created() {
+    mounted() {
       this.$http.get('histories')
         .then(resp => {
           this.total = resp.data.length
