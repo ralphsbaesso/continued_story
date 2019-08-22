@@ -1,30 +1,46 @@
 <template>
   <main>
 
-    <div class="history head">
+    <b-modal ref="modal-register" title="Nova Historia" @hide="backPage()">
+
+      <b-form>
+        <b-form-group label="Título" label-for="input-title">
+          <b-form-input id="input-title" v-model="history.title"/>
+        </b-form-group>
+
+        <b-form-group label="Descrição" label-for="input-description">
+          <b-form-input id="input-description" v-model="history.description"/>
+        </b-form-group>
+
+      </b-form>
+
+      <div slot="modal-footer">
+        <b-button variant="outline-info" @click="backPage()">Cancelar</b-button>
+        <b-button variant="outline-success" @click="salve()">Salvar</b-button>
+      </div>
+    </b-modal>
+
+    <div v-if="history.id" class="history head">
       <input class="title" placeholder="Digite o título aqui" v-model="history.title" :readonly="!editable">
       <input class="description" placeholder="Digite a descrição aqui" v-model="history.description">
-    </div>
 
-    <div class="page">
-
-      <div v-if="hasChapter" class="chapter">
-        <input class="title head" placeholder="Digite o título aqui" v-model="firstChapter.title">
-        <input class="description head" v-model="firstChapter.description" placeholder="Digite descrição aqui"/>
-        <textarea class="content" v-model="firstChapter.content" placeholder="Digite o conteúdo aqui"></textarea>
-      </div>
-      <div v-else class="chapter">
-        <div class="title">
-          Nenhum captulo escrito
+      <div v-if="history.chapters.length > 0">
+        <div v-for="chapter in history.chapters">
+          <Chapter :chapter="chapter"/>
         </div>
       </div>
-
+      <div v-else>
+        Nenhum Capítulo Escrito
+      </div>
     </div>
+
 
     <div class="menu">
       <button @click="salve">Salvar</button>
       <button @click="addChapter">Novo Capítulo</button>
-      <button>Outra coisa</button>
+      <div v-if="history.id">
+        <button @click="excluir(history.id)">Excluir</button>
+      </div>
       <button>mais outra coisa</button>
     </div>
 
@@ -36,36 +52,30 @@
 
 <script>
   import Load from '../../components/Load'
+  import Chapter from './Chapter'
+
   export default {
     props: ['id'],
-    components: { Load },
+    components: { Load, Chapter },
     data() {
       return {
         history: {
-          id: null,
           chapters: []
         },
         edit: true,
-        hasChapter: false,
         load: false
       }
     },
     mounted() {
-      if (!this.$store.state.user || this.id === 'new')
-        return
+      if (!this.$store.state.user || this.id === 'new') {
+        this.$refs['modal-register'].show()
+      } else {
 
-      this.load = true
-      this.$http.get(`histories/${this.id}`)
-        .then(resp => this.history = resp.data)
-        .then(() => this.load = false)
-        .catch(e => console.log(e))
-    },
-    watch: {
-      history: {
-        handler(newValue) {
-          this.hasChapter = newValue.chapters.length > 0
-        },
-        deep: true
+        this.load = true
+        this.$http.get(`histories/${this.id}`)
+          .then(resp => this.history = resp.data)
+          .then(() => this.load = false)
+          .catch(e => console.log(e))
       }
     },
     computed: {
@@ -90,6 +100,14 @@
       },
       salve(){
         this.$http.post('/histories', { history: this.history })
+          .then((data) => console.log(data))
+      },
+      excluir(id) {
+        this.$http.delete(`/histories/${id}.js`)
+          .then(() => this.$router.push('/histories'))
+      },
+      backPage() {
+        window.history.back()
       }
     }
   }

@@ -12,13 +12,19 @@ class HistoriesController < ApplicationController
     h = History.new params_history
     h.user = current_user
     h.save
-    render json: :ok
+    render json: h
   end
 
   def update
   end
 
   def destroy
+    history = History.find(params[:id])
+    if history.delete
+      render json: :ok
+    else
+      p history.errors
+    end
   end
 
   private

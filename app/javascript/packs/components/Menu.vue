@@ -1,6 +1,5 @@
 <template>
   <div>
-    <h1>Meu menu</h1>
     <div class="ch-box">
       <router-link to="/">Início</router-link>
     </div>
