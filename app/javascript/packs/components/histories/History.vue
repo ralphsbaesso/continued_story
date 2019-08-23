@@ -1,6 +1,9 @@
 <template>
   <main>
 
+    <h1>id {{ history.id}}</h1>
+    <h1>capitulo {{ hasChapter }}</h1>
+
     <b-modal ref="modal-register" title="Nova Historia" @hide="backPage()">
 
       <b-form>
@@ -24,7 +27,7 @@
       <input class="title" placeholder="Digite o título aqui" v-model="history.title" :readonly="!editable">
       <input class="description" placeholder="Digite a descrição aqui" v-model="history.description">
 
-      <div v-if="history.chapters.length > 0">
+      <div v-if="hasChapter">
         <div v-for="chapter in history.chapters">
           <Chapter :chapter="chapter"/>
         </div>
@@ -79,13 +82,8 @@
       }
     },
     computed: {
-      firstChapter() {
-        if(this.history.chapters && this.history.chapters.length > 0){
-          console.log(this.history.chapters[0])
-          return this.history.chapters[0]}
-        else{
-          console.log('nada')
-          return null}
+      hasChapter() {
+        return this.history.chapters && this.history.chapters.length > 0
       }
     },
     methods: {
@@ -100,14 +98,16 @@
       },
       salve(){
         this.$http.post('/histories', { history: this.history })
-          .then((data) => console.log(data))
+          .then((resp) => this.history = resp.data)
+          .then(() => this.$refs['modal-register'].hide())
       },
       excluir(id) {
         this.$http.delete(`/histories/${id}.js`)
           .then(() => this.$router.push('/histories'))
       },
       backPage() {
-        window.history.back()
+        if(!this.history.id)
+          window.history.back()
       }
     }
   }
@@ -115,9 +115,9 @@
 
 <style scoped>
 
-  main {
-    height: 100vh;
-  }
+  /*main {*/
+  /*  height: 100vh;*/
+  /*}*/
   main input, textarea {
     background-color: transparent;
     border: none;

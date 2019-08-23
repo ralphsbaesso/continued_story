@@ -54,6 +54,7 @@ p {
   }
 
   main {
+    min-height: calc(100vh - 112px);
     grid-area: grid-main;
     background: linear-gradient(to right, rgb(15, 32, 39), rgb(32, 58, 67), rgb(44, 83, 100));
     color: #FFF;
@@ -67,7 +68,6 @@ p {
 
   #app {
     display: grid;
-    min-height: 100vh;
     grid-template-columns: 150px 1fr;
     grid-template-rows: 56px 1fr 56px;
     grid-template-areas:
