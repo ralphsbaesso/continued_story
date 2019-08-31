@@ -12,7 +12,6 @@ class HistoriesController < ApplicationController
     h = History.new params_history
     h.user = current_user
     h.save
-    p h
     render json: h
   end
 

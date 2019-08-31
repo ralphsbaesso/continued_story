@@ -1,9 +1,7 @@
 <template>
   <div id="app">
     <main class="tag">
-      <b-container fluid>
-        <router-view />
-      </b-container>
+      <router-view />
     </main>
     <header class="tag">
       <Header />
@@ -39,10 +37,10 @@
 </script>
 
 <style scoped>
-p {
-  font-size: 2em;
-  text-align: center;
-}
+  p {
+    font-size: 2em;
+    text-align: center;
+  }
 
   header {
     grid-area: grid-header;
@@ -54,7 +52,9 @@ p {
   }
 
   main {
-    min-height: calc(100vh - 112px);
+    overflow-y: auto;
+    padding: 0;
+    height: calc(100vh - 112px);
     grid-area: grid-main;
     background: linear-gradient(to right, rgb(15, 32, 39), rgb(32, 58, 67), rgb(44, 83, 100));
     color: #FFF;

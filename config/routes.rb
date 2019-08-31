@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   }
 
   resources :histories
+  resources :chapters
 
   get 'users/current', to: 'users#current'
 

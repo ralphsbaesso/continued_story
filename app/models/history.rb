@@ -17,8 +17,7 @@ class History < ApplicationRecord
 
   def as_json(options = {})
     model = super(options)
-    # model[:chapters] = [self.chapters.first]
-    # p model
+    model[:chapter_ids] = self.chapter_ids
     model
   end
 

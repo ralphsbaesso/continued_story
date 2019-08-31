@@ -21,4 +21,12 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :histories
+
+  def chapter(chapter_id)
+    Chapter.joins(:history)
+      .where(
+        'histories.user_id = :user_id and chapters.id = :chapter_id',
+        user_id: self.id, chapter_id: chapter_id
+      ).first
+  end
 end
