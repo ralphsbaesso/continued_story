@@ -6,7 +6,8 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     user: null,
-    currentHistory: null,
+    currentHistory: {
+      chapters: []
+    },
   }
-
 });

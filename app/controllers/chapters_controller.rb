@@ -1,7 +1,8 @@
 class ChaptersController < ApplicationController
+  before_action :set_chapter, only: [:update, :destroy]
 
   def show
-    chapter = current_user.chapter(params[:id])
+    chapter = current_user.find_chapter(params[:id])
     render json: chapter
   end
 
@@ -12,17 +13,28 @@ class ChaptersController < ApplicationController
   end
 
   def update
-    chapter = current_user.chapter(params[:id])
-    chapter.update!(params_chapter)
-    render json: chapter
+    if @chapter.update(params_chapter)
+      render json: @chapter
+    else
+      p @chapter.errors
+    end
   end
 
   def destroy
+    if @chapter.destroy
+      render json: @chapter
+    else
+      p @chapter.errors
+    end
   end
 
   private
 
   def params_chapter
     params.require(:chapter).permit(:title, :description, :content, :history_id)
+  end
+
+  def set_chapter
+    @chapter = current_user.find_chapter(params[:id])
   end
 end

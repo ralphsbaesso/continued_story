@@ -1,11 +1,12 @@
 <template>
   <main>
 
-    <div @click="showEntity ? showEntity=false : showEntity=true">show</div>
-    <div v-if="showEntity">
-      <h1>id {{ history}}</h1>
-      <h3>{{ $store.state.currentHistory }}</h3>
-    </div>
+<!--    <div @click="showEntity ? showEntity=false : showEntity=true">show</div>-->
+<!--    <div v-if="showEntity">-->
+<!--      <h3>id {{ history}}</h3>-->
+<!--      <hr>-->
+<!--      <h4>{{ $store.state.currentHistory }}</h4>-->
+<!--    </div>-->
 
     <b-modal ref="modal-register" title="Nova Historia" @hide="closeModal()">
 
@@ -18,6 +19,16 @@
           <b-form-input id="input-description" v-model="history.description"/>
         </b-form-group>
 
+        <b-form-group label="Privado?">
+          <b-form-radio-group
+            id="btn-radios-1"
+            v-model="history.private"
+            :options="options"
+            buttons
+            name="radios-btn-default"
+          ></b-form-radio-group>
+        </b-form-group>
+
       </b-form>
 
       <div slot="modal-footer">
@@ -26,32 +37,37 @@
       </div>
     </b-modal>
 
-    <div v-if="history.id" class="history head">
-      <input class="title" placeholder="Digite o título aqui" v-model="history.title" :readonly="!editable">
-      <input class="description" placeholder="Digite a descrição aqui" v-model="history.description">
-
-      <div v-if="hasChapter">
-        <div v-for="id in history.chapter_ids">
-          <Chapter :id="id" :history_id="history.id"/>
-        </div>
+    <div v-if="$store.state.user" class="options">
+      <div @click="$refs['modal-register'].show()">
+        <i class="fa fa-edit"></i>
+        <span>Editar</span>
       </div>
+
+      <div @click="destroy()">
+        <i class="fa fa-trash"></i>
+        <span>Excluir</span>
+      </div>
+    </div>
+
+    <div v-if="history.id" class="history head">
+      <div class="title">{{ history.title }}</div>
+      <div class="description">{{ history.description }}</div>
+
+      <template v-if="hasChapter">
+        <Chapter v-for="(chapter, index) in history.chapters" :key="chapter.id"
+                  :chapter="chapter"
+                 @updateChapter="updateChapter($event, index)"
+                 @deleteChapter="deleteChapter(index)"
+        />
+
+      </template>
       <div v-else>
         Nenhum Capítulo Escrito
       </div>
     </div>
 
     <div class="new-chapter">
-      <h3 @click="addChapter">Novo Capítulo</h3>
-    </div>
-
-
-    <div class="menu">
-      <div>
-        <button @click="">Salvar</button>
-        <button @click="addChapter">Novo Capítulo</button>
-        <button v-if="history.id" @click="excluir(history.id)">Excluir</button>
-        <button>mais outra coisa</button>
-      </div>
+      <h2 @click="addChapter">Novo Capítulo</h2>
     </div>
 
     <transition name="load">
@@ -72,6 +88,9 @@
         history: {
           chapter_ids: []
         },
+        options: [
+          { text: 'Privado', value: true }, { text: 'Público', value: false },
+        ],
         edit: true,
         load: false,
         showEntity: false
@@ -82,51 +101,20 @@
     },
     computed: {
       hasChapter() {
-        return this.history.chapter_ids && this.history.chapter_ids.length > 0
-      }
+        return this.history.chapters && this.history.chapters.length > 0
+      },
     },
     watch: {
       $route(to, from) {
         if(this.history.id && this.history.id !== to.params.id) {
           this.loadHistory(to.params.id)
-          this.history.chapter_ids = []
         }
       },
       history(to, from) {
-        // console.log('mudando history', to)
         this.$store.state.currentHistory = to
-      }
+      },
     },
     methods: {
-      editable() {
-        return this.$store.state.user || !this.history.id
-      },
-      addChapter() {
-        this.history.chapter_ids.push(null)
-      },
-      salve(){
-        let id = this.history.id
-        let url = id ? `histories/${id}.js` :'histories.js'
-        let method = id ? 'put' : 'post'
-
-        this.$http[method](url, { history: this.history })
-          .then((resp) => this.history = resp.data)
-          .then(() => this.$router.replace(`${this.history.id}`))
-          .then(() => this.closeModal())
-      },
-      excluir(id) {
-        this.$http.delete(`/histories/${id}.js`)
-          .then(() => this.toPageHistories())
-      },
-      closeModal(){
-        if(!this.history.id)
-          this.toPageHistories()
-
-        this.$refs['modal-register'].hide()
-      },
-      toPageHistories() {
-        this.$router.push('/histories')
-      },
       loadHistory(id) {
         if(!id)
           id = this.id
@@ -141,7 +129,56 @@
           .then(() => this.load = false)
           .catch(e => console.log(e))
         }
-      }
+      },
+      salve(){
+        let id = this.history.id
+        let url = id ? `histories/${id}.js` :'histories.js'
+        let method = id ? 'put' : 'post'
+
+        this.$http[method](url, { history: this.history })
+          .then((resp) => this.history = resp.data)
+          .then(() => this.$router.replace(`${this.history.id}`))
+          .then(() => this.closeModal())
+          .catch((e) => console.log(e))
+      },
+      destroy() {
+        if(!confirm('Tem certeza?'))
+          return
+
+        let id = this.history.id
+        this.$http.delete(`/histories/${id}.js`)
+          .then(() => this.toPageHistories())
+          .catch((e) => console.log(e))
+      },
+      editable() {
+        return this.$store.state.user || !this.history.id
+      },
+      addChapter() {
+        let chapter = { history_id: this.history.id }
+        this.$http.post('chapters', { chapter: chapter })
+          .then((resp) => this.history.chapters.push(resp.data))
+          .catch((e) => console.log(e))
+      },
+      updateChapter(chapter, index){
+        this.$http.put(`chapters/${chapter.id}`, { chapter: chapter })
+          .then((resp) => chapter = resp.data )
+          .catch((e) => console.log(e))
+      },
+      deleteChapter(index){
+        let chapter = this.history.chapters[index]
+        this.$http.delete(`/chapters/${chapter.id}.js`)
+          .then(() => this.history.chapters.splice(index, 1))
+          .catch((e) => console.log(e))
+      },
+      closeModal(){
+        if(!this.history.id)
+          this.toPageHistories()
+
+        this.$refs['modal-register'].hide()
+      },
+      toPageHistories() {
+        this.$router.push('/histories')
+      },
     }
   }
 </script>
@@ -149,7 +186,14 @@
 <style scoped>
 
   main {
-    /*position: relative;*/
+    position: relative;
+  }
+
+  .options {
+    position: absolute;
+    right: 30px;
+    top: 30px;
+    z-index: 100;
   }
 
   main input, textarea {
@@ -161,34 +205,25 @@
     width: 100%;
   }
 
-  .menu {
+  .new-chapter {
     display: flex;
     align-items: center;
     justify-content: center;
-    position: fixed;
-    bottom: 70px;
-    width: calc(100% - 150px);
-    left: 150px;
+    width: 100%;
   }
 
-  .menu div {
-    background-color: whitesmoke;
+  .new-chapter h2 {
+    background-color: #a0522d;
     box-shadow: 5px 5px #888888;
     display: flex;
-  }
-
-  .menu button {
-    background-color: #a0522d;
-    padding: 5px;
-    margin: 5px;
-    color: white;
+    cursor: pointer;
+    color: black;
     font-weight: bold;
     text-align: center;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 5px;
   }
-  .history {
-    padding-bottom: 100px;
-  }
-
 
   .history .description{
     text-transform: uppercase;

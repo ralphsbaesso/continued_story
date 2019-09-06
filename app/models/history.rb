@@ -13,12 +13,30 @@
 class History < ApplicationRecord
   belongs_to :user
   has_many :chapters, dependent: :delete_all, autosave: true
-  accepts_nested_attributes_for :chapters
+
+  scope :list_private, -> { where(private: true) }
+  scope :list_public, -> { where(private: false) }
 
   def as_json(options = {})
+    options[:include] = :chapters
     model = super(options)
-    model[:chapter_ids] = self.chapter_ids
     model
+  end
+
+  def self.rules_of_insert
+    [
+
+    ]
+  end
+
+  def self.rules_of_update
+
+  end
+
+  def self.rules_of_list
+    [
+      SHistory::Filter
+    ]
   end
 
 end

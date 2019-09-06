@@ -22,7 +22,7 @@ class User < ApplicationRecord
 
   has_many :histories
 
-  def chapter(chapter_id)
+  def find_chapter(chapter_id)
     Chapter.joins(:history)
       .where(
         'histories.user_id = :user_id and chapters.id = :chapter_id',

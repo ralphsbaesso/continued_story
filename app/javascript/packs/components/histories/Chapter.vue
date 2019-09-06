@@ -1,12 +1,18 @@
 <template>
   <div>
 
-    <div @click="showEntity ? showEntity=false : showEntity=true">show</div>
-    <div v-if="showEntity">
-      <h1>{{ chapter }}</h1>
-    </div>
+<!--    <div @click="showEntity ? showEntity=false : showEntity=true">show</div>-->
+<!--    <div v-if="showEntity">-->
+<!--      <h1>{{ chapter }}</h1>-->
+<!--    </div>-->
 
     <div class="page">
+
+      <div class="options">
+        <i @click="destroy()" class="fa fa-trash"></i>
+        <span>Excluir</span>
+      </div>
+
       <div class="chapter">
         <input class="title head" placeholder="Digite o título aqui" v-model="chapter.title"
           @focusout="update()"
@@ -28,26 +34,10 @@
 <script>
   export default {
     name: "Chapter",
-    props: ['id', 'history_id'],
+    props: ['chapter'],
     data() {
       return {
-        chapter: {},
         showEntity: false
-      }
-    },
-    mounted() {
-      if(this.id) {
-        this.$http.get(`chapters/${this.id}`)
-          .then((resp) => this.chapter = resp.data)
-      } else {
-        this.chapter.history_id = this.history_id
-        this.$http.post('chapters', { chapter: this.chapter })
-          .then((resp) => this.chapter = resp.data)
-          .then(() => {
-            let chapterIds = this.$store.state.currentHistory.chapter_ids
-            let index = chapterIds.length - 1
-            chapterIds[index] = this.chapter.id
-          })
       }
     },
     methods: {
@@ -56,12 +46,14 @@
         element.style.height = (element.scrollHeight)+"px"
       },
       update() {
-        if (!this.chapter.id)
+        this.$emit('updateChapter', this.chapter)
+      },
+      destroy() {
+        if(!confirm('Tem certeza?'))
           return
 
-        this.$http.put(`chapters/${this.chapter.id}`, { chapter: this.chapter })
-          .then((resp) => console.log(resp.data))
-      }
+        this.$emit('deleteChapter')
+      },
     }
   }
 </script>
@@ -73,6 +65,11 @@
     background-color: #f9f7f1;
     margin: 40px 40px 40px 40px;
     padding: 20px 20px 20px 20px;
+  }
+
+  .chapter {
+    display: flex;
+    flex-direction: column;
   }
   .chapter .title{
     font-weight: 400;
@@ -117,5 +114,11 @@
     overflow: hidden;
   }
 
+  .options {
+    text-align: right;
+    right: 15px;
+    top: 15px;
+    z-index: 100;
+  }
 
 </style>
