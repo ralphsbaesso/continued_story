@@ -3,13 +3,7 @@ class HistoriesController < ApplicationController
 
   def index
     transpoter = facade.select :history
-      # if current_user
-      #    current_user.histories
-      # else
-      #   History.where(private: false)
-      # end
 
-    p transpoter
     if transpoter.status == :green
       render json: transpoter.bucket[:histories]
     else
@@ -61,7 +55,4 @@ class HistoriesController < ApplicationController
     @history = current_user.histories.find(params[:id])
   end
 
-  def facade
-    Facade.new current_user
-  end
 end

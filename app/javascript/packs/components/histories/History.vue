@@ -37,17 +37,19 @@
       </div>
     </b-modal>
 
-    <div v-if="$store.state.user" class="options">
-      <div @click="$refs['modal-register'].show()">
-        <i class="fa fa-edit"></i>
-        <span>Editar</span>
-      </div>
+    <AllowedFor>
+      <div class="options">
+        <div @click="$refs['modal-register'].show()">
+          <i class="fa fa-edit"></i>
+          <span>Editar</span>
+        </div>
 
-      <div @click="destroy()">
-        <i class="fa fa-trash"></i>
-        <span>Excluir</span>
+        <div @click="destroy()">
+          <i class="fa fa-trash"></i>
+          <span>Excluir</span>
+        </div>
       </div>
-    </div>
+    </AllowedFor>
 
     <div v-if="history.id" class="history head">
       <div class="title">{{ history.title }}</div>
@@ -79,10 +81,11 @@
 <script>
   import Load from '../../components/Load'
   import Chapter from './Chapter'
+  import AllowedFor from '../../components/AllowedFor'
 
   export default {
     props: ['id'],
-    components: { Load, Chapter },
+    components: { Load, Chapter, AllowedFor },
     data() {
       return {
         history: {

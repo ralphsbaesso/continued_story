@@ -6,21 +6,21 @@
     <div class="ch-box">
       <router-link to="/histories">Historias</router-link>
     </div>
-    <div class="ch-box">
-      <router-link to="/histories/new">Nova História</router-link>
-    </div>
+    <AllowedFor>
+      <div class="ch-box">
+        <router-link to="/histories/new">Nova História</router-link>
+      </div>
+    </AllowedFor>
   </div>
 </template>
 
 <script>
   import Histories from './Histories'
+  import AllowedFor from './AllowedFor'
 
   export default {
     name: 'Menu',
-    components: {
-      Histories
-    }
-
+    components: { Histories, AllowedFor }
   }
 </script>
 
