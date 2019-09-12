@@ -2,10 +2,10 @@
   <main>
 
 <!--    <div @click="showEntity ? showEntity=false : showEntity=true">show</div>-->
-<!--    <div v-if="showEntity">-->
-<!--      <h3>id {{ history}}</h3>-->
+<!--    <div v-if="!showEntity">-->
+<!--      <h4>id {{ history}}</h4>-->
 <!--      <hr>-->
-<!--      <h4>{{ $store.state.currentHistory }}</h4>-->
+<!--&lt;!&ndash;      <h4>{{ $store.state.currentHistory }}</h4>&ndash;&gt;-->
 <!--    </div>-->
 
     <b-modal ref="modal-register" title="Nova Historia" @hide="closeModal()">
@@ -22,7 +22,7 @@
         <b-form-group label="Privado?">
           <b-form-radio-group
             id="btn-radios-1"
-            v-model="history.private"
+            v-model="history.private || false"
             :options="options"
             buttons
             name="radios-btn-default"
@@ -88,9 +88,7 @@
     components: { Load, Chapter, AllowedFor },
     data() {
       return {
-        history: {
-          chapter_ids: []
-        },
+        history: {},
         options: [
           { text: 'Privado', value: true }, { text: 'Público', value: false },
         ],
@@ -124,7 +122,7 @@
 
         if (id === 'new') {
           this.$refs['modal-register'].show()
-          this.history = { history: { chapters: [] } }
+          this.history = { history: { chapters: [], private: false } }
         } else {
         this.load = true
         this.$http.get(`histories/${id}`)

@@ -1,18 +1,4 @@
 
-<% flash.each do |name, msg| %>
-
-  <% if msg.class == Array %>
-    <% msg.each do |message| %>
-      <%= content_tag :div, message, :id => "flash_#{name}" %>
-    <% end %>
-  <% else %>
-
-    # old code
-    <%= content_tag :div, msg, :id => "flash_#{name}" %>
-
-  <% end %>
-<% end %>
-
 <div class="container devise">
   <div class="row">
     <div class="col-md-5 mx-auto">
@@ -20,9 +6,11 @@
         <div class="myform form ">
           <div class="logo mb-3">
             <div class="col-md-12 text-center">
-              <h1>Login</h1>
+              <h1>Entrar</h1>
             </div>
           </div>
+
+          <%= render 'users/shared/error_messages' %>
 
           <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
             <div class="form-group">
@@ -44,7 +32,7 @@
               <% end %>
             </div>
             <div class="col-md-12 text-center ">
-              <%= f.submit 'Login', class: "btn btn-block mybtn btn-primary tx-tfm" %>
+              <%= f.submit 'Entrar', class: "btn btn-block mybtn btn-primary tx-tfm" %>
             </div>
             <hr>
             <div class="form-group">
